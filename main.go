@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
+	"strconv"
 
 	"github.com/fogleman/gg"
 
@@ -66,8 +68,8 @@ func saveImage(dc *gg.Context, path string) {
 }
 
 func drawBox(dc *gg.Context, box structs.BoundingBox) {
-	x := (box.Center.X / 5e3) - (box.Width/5e3)/2
-	y := (box.Center.Y / 5e3) - (box.Width/5e3)/2
+	x := (box.Center.X / 5e3 * 2.5) - ((box.Width / 5e3 * 2.5) / 4)
+	y := (box.Center.Y / 5e3 * 2.5) - ((box.Width / 5e3 * 2.5) / 4)
 	w := box.Width / 5e3
 
 	log.Println("[   ] Drawing the Box")
@@ -102,8 +104,8 @@ func drawStar(dc *gg.Context, star structs.Star2D) {
 	// scalingFactor := 50
 	defaultStarSize := 2.0
 
-	x := star.C.X / 5e3
-	y := star.C.Y / 5e3
+	x := star.C.X / 5e3 * 2.5
+	y := star.C.Y / 5e3 * 2.5
 
 	fmt.Printf("(%20.3f, %20.3f)\n", x, y)
 
@@ -122,8 +124,8 @@ func drawStarlist(dc *gg.Context, starlist []structs.Star2D) {
 // initializePlot generates a new plot and returns the plot context
 func initializePlot() *gg.Context {
 	// Define the image size
-	const imageWidth = 8192
-	const imageHeight = 8192
+	const imageWidth = 8192 * 2
+	const imageHeight = 8192 * 2
 
 	// Initialize the new context
 	dc := gg.NewContext(imageWidth, imageHeight)
@@ -141,8 +143,8 @@ func initializePlot() *gg.Context {
 	return dc
 }
 
-func drawallboxes(amount int) {
-	for i := 0; i < amount; i++ {
+func drawallboxes(amount int64) {
+	for i := 0; i < int(amount); i++ {
 		index := fmt.Sprintf("%d", i)
 		readfile(fmt.Sprintf("%s.json", index))
 		drawtree(0, fmt.Sprintf("%s.png", index))
@@ -150,12 +152,9 @@ func drawallboxes(amount int) {
 }
 
 func main() {
-	var amount int
-	_, err := fmt.Scanf("%d", &amount)
-	if err != nil {
-		panic(err)
+	amount, parseErr := strconv.ParseInt(os.Args[1], 10, 64)
+	if parseErr != nil {
+		panic(amount)
 	}
-
 	drawallboxes(amount)
-
 }
