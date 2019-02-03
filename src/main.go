@@ -53,7 +53,6 @@ func drawStars(s *svg.SVG, listOfStars []structs.Star2D) {
 	for _, star := range listOfStars {
 		x := int(star.C.X / 2000)
 		y := int(star.C.Y / 2000)
-		fmt.Printf("(%d, %d)\n", x, y)
 		s.Circle(x, y, 1, s.RGB(255, 255, 255))
 	}
 	log.Println("[   ] Done drawing the stars")
@@ -70,7 +69,6 @@ func drawBox(s *svg.SVG, node *structs.Node) {
 		x := int(node.Boundry.Center.X / 2000)
 		y := int(node.Boundry.Center.Y / 2000)
 		w := int(node.Boundry.Width / 2000)
-		fmt.Printf("Box {{%d, %d}, %d}\n", x, y, w)
 		s.CenterRect(x, y, w, w, "fill:none;stroke:white")
 	}
 
@@ -117,5 +115,5 @@ func main() {
 
 	router.HandleFunc("/drawtree/{treeindex}", drawTree).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":2003", router))
+	log.Fatal(http.ListenAndServe(":80", router))
 }
