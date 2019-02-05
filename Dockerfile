@@ -2,7 +2,7 @@ FROM golang:latest
 
 WORKDIR /home
 
-COPY /src /home/
+COPY main.go /home/
 
 RUN ["go", "get", "git.darknebu.la/GalaxySimulator/structs"]
 RUN ["go", "get", "github.com/ajstarks/svgo"]

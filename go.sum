@@ -1,0 +1,6 @@
+git.darknebu.la/GalaxySimulator/structs v0.0.0-20190205205735-9dd56b9448e5 h1:aEQHEERwdLfRJrXb867wZzRMs1ym+j0zDys3opLWPew=
+git.darknebu.la/GalaxySimulator/structs v0.0.0-20190205205735-9dd56b9448e5/go.mod h1:LSDIBBC7IcWERm4wlDAroMpsUP7zJ1yDZFlQnP/UIsQ=
+github.com/ajstarks/svgo v0.0.0-20181006003313-6ce6a3bcf6cd h1:JdtityihAc6A+gVfYh6vGXfZQg+XOLyBvla/7NbXFCg=
+github.com/ajstarks/svgo v0.0.0-20181006003313-6ce6a3bcf6cd/go.mod h1:K08gAheRH3/J6wwsYMMT4xOr94bZjxIelGM0+d/wbFw=
+github.com/gorilla/mux v1.7.0 h1:tOSd0UKHQd6urX6ApfOn4XdBMY6Sh1MfxV3kmaazO+U=
+github.com/gorilla/mux v1.7.0/go.mod h1:1lud6UwP+6orDFRuTfBEV8e9/aOM/c4fVVCaMa2zaAs=
