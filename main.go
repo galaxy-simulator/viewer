@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-package viewer
+package main
 
 import (
 	"encoding/json"
@@ -81,10 +81,10 @@ func drawBoxes(s *svg.SVG, treeindex int64) {
 }
 
 func drawBox(s *svg.SVG, node *structs.Node) {
-	if node.Boundry != (structs.BoundingBox{}) {
-		x := int(node.Boundry.Center.X / 2000)
-		y := int(node.Boundry.Center.Y / 2000)
-		w := int(node.Boundry.Width / 2000)
+	if node.Boundary != (structs.BoundingBox{}) {
+		x := int(node.Boundary.Center.X / 2000)
+		y := int(node.Boundary.Center.Y / 2000)
+		w := int(node.Boundary.Width / 2000)
 		s.CenterRect(x, y, w, w, "fill:none;stroke:white")
 	}
 
