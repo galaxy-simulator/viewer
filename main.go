@@ -39,19 +39,27 @@ var (
 	treeArray []*structs.Node
 )
 
+func indexHandler(w http.ResponseWriter, r *http.Request) {
+	httpWriter := log.New(w, "", 0)
+	httpWriter.Println("Hello, I'm the viewer!")
+}
+
 func drawTree(w http.ResponseWriter, r *http.Request) {
-	log.Println("The drawtree handler was accessed")
+	log.Println("[   ] The drawtree handler was accessed")
 	w.Header().Set("Content-Type", "image/svg+xml")
 
 	// get the tree index
 	vars := mux.Vars(r)
 	treeindex, _ := strconv.ParseInt(vars["treeindex"], 10, 0)
 
+	log.Println("[   ] Defining a new svg to write on")
+
 	// define the svg
 	s := svg.New(w)
 	s.Start(width, height)
 	s.Rect(0, 0, width, height, s.RGB(0, 0, 0))
 	s.Gtransform(fmt.Sprintf("translate(%d,%d)", width/2, height/2))
+	log.Println("      Done")
 
 	getGalaxy(treeindex)
 	listOfStars := treeArray[treeindex].GetAllStars()
@@ -123,13 +131,15 @@ func getGalaxy(index int64) {
 	}
 
 	treeArray = append(treeArray, tree)
-	log.Println("[   ] Done Getting the galaxy")
+	log.Println("      Done getting the galaxy")
 }
 
 func main() {
 	router := mux.NewRouter()
 
+	router.HandleFunc("/", indexHandler).Methods("GET")
 	router.HandleFunc("/drawtree/{treeindex}", drawTree).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":80", router))
+	fmt.Println("Listening on port 8081")
+	log.Fatal(http.ListenAndServe(":8081", router))
 }
